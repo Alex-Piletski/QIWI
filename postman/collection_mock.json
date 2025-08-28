@@ -1,0 +1,90 @@
+{
+  "info": {
+    "name": "Qiwi API Mock Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Check service access",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://mock.qiwi/api/payments",
+          "host": ["mock.qiwi", "api", "payments"]
+        }
+      },
+      "response": [
+        {
+          "name": "Mock response",
+          "status": "OK",
+          "code": 200,
+          "body": "{ \"data\": [{ \"id\": \"123\", \"status\": \"SUCCESS\" }] }"
+        }
+      ]
+    },
+    {
+      "name": "Check balance > 0",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://mock.qiwi/api/accounts",
+          "host": ["mock.qiwi", "api", "accounts"]
+        }
+      },
+      "response": [
+        {
+          "name": "Mock response",
+          "status": "OK",
+          "code": 200,
+          "body": "{ \"accounts\": [{ \"balance\": { \"amount\": 100, \"currency\": \"RUB\" } }] }"
+        }
+      ]
+    },
+    {
+      "name": "Create payment 1 RUB",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"id\": \"test_123\", \"sum\": { \"amount\": 1, \"currency\": \"RUB\" }, \"paymentMethod\": { \"type\": \"Account\", \"accountId\": \"643\" }, \"fields\": { \"account\": \"79000000000\" } }"
+        },
+        "url": {
+          "raw": "https://mock.qiwi/api/transfer",
+          "host": ["mock.qiwi", "api", "transfer"]
+        }
+      },
+      "response": [
+        {
+          "name": "Mock response",
+          "status": "OK",
+          "code": 200,
+          "body": "{ \"status\": \"SUCCESS\" }"
+        }
+      ]
+    },
+    {
+      "name": "Check payment execution",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://mock.qiwi/api/payments/test_123",
+          "host": ["mock.qiwi", "api", "payments", "test_123"]
+        }
+      },
+      "response": [
+        {
+          "name": "Mock response",
+          "status": "OK",
+          "code": 200,
+          "body": "{ \"status\": \"SUCCESS\" }"
+        }
+      ]
+    }
+  ]
+}
