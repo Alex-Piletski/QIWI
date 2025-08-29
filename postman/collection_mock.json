@@ -1,150 +1,339 @@
 {
-  "info": {
-    "name": "Qiwi API Mock Tests",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Check service access",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/payments",
-          "host": ["{{baseUrl}}"],
-          "path": ["payments"]
-        }
-      },
-      "response": [
-        {
-          "name": "Example: payments list",
-          "originalRequest": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/payments",
-              "host": ["{{baseUrl}}"],
-              "path": ["payments"]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [{ "key": "Content-Type", "value": "application/json" }],
-          "body": "{ \"data\": [{ \"id\": \"123\", \"status\": \"SUCCESS\" }] }"
-        }
-      ]
-    },
-    {
-      "name": "Check balance > 0",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/accounts",
-          "host": ["{{baseUrl}}"],
-          "path": ["accounts"]
-        }
-      },
-      "response": [
-        {
-          "name": "Example: account balance",
-          "originalRequest": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/accounts",
-              "host": ["{{baseUrl}}"],
-              "path": ["accounts"]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [{ "key": "Content-Type", "value": "application/json" }],
-          "body": "{ \"accounts\": [{ \"balance\": { \"amount\": 100, \"currency\": \"RUB\" } }] }"
-        }
-      ]
-    },
-    {
-      "name": "Create payment 1 RUB",
-      "request": {
-        "method": "POST",
-        "header": [
-          { "key": "Content-Type", "value": "application/json" }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{ \"id\": \"test_123\", \"sum\": { \"amount\": 1, \"currency\": \"RUB\" }, \"paymentMethod\": { \"type\": \"Account\", \"accountId\": \"643\" }, \"fields\": { \"account\": \"79000000000\" } }"
-        },
-        "url": {
-          "raw": "{{baseUrl}}/transfer",
-          "host": ["{{baseUrl}}"],
-          "path": ["transfer"]
-        }
-      },
-      "response": [
-        {
-          "name": "Example: create payment",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{ \"id\": \"test_123\" }"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/transfer",
-              "host": ["{{baseUrl}}"],
-              "path": ["transfer"]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [{ "key": "Content-Type", "value": "application/json" }],
-          "body": "{ \"status\": \"SUCCESS\" }"
-        }
-      ]
-    },
-    {
-      "name": "Check payment execution",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/payments/test_123",
-          "host": ["{{baseUrl}}"],
-          "path": ["payments", "test_123"]
-        }
-      },
-      "response": [
-        {
-          "name": "Example: payment status",
-          "originalRequest": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/payments/test_123",
-              "host": ["{{baseUrl}}"],
-              "path": ["payments", "test_123"]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [{ "key": "Content-Type", "value": "application/json" }],
-          "body": "{ \"status\": \"SUCCESS\" }"
-        }
-      ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "https://mock.qiwi/api"
-    }
-  ]
+	"info": {
+		"_postman_id": "00e2d49d-e88e-4126-a001-488aca98d50c",
+		"name": "Qiwi API Mock Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43584948",
+		"_collection_link": "https://alex-3791877.postman.co/workspace/Pet-project-on-Flask~ad1f0884-2800-4c58-8b46-84b2480cabbd/collection/43584948-00e2d49d-e88e-4126-a001-488aca98d50c?action=share&source=collection_link&creator=43584948"
+	},
+	"item": [
+		{
+			"name": "Check service access",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/payments",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Mock response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_URL}}/payments",
+							"host": [
+								"{{base_URL}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{ \"data\": [{ \"id\": \"123\", \"status\": \"SUCCESS\" }] }"
+				},
+				{
+					"name": "Check service access",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_URL}}/payments",
+							"host": [
+								"{{base_URL}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"data\": [\n    { \"id\": \"123\", \"status\": \"SUCCESS\" },\n    { \"id\": \"124\", \"status\": \"WAITING\" }\n  ]\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Check balance > 0",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/accounts",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Mock response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_URL}}/accounts",
+							"host": [
+								"{{base_URL}}"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{ \"accounts\": [{ \"balance\": { \"amount\": 100, \"currency\": \"RUB\" } }] }"
+				},
+				{
+					"name": "Check balance > 0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_URL}}/accounts",
+							"host": [
+								"{{base_URL}}"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"accounts\": [\n    { \"balance\": { \"amount\": 100, \"currency\": \"RUB\" } }\n  ]\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Create payment 1 RUB",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\": \"test_123\", \"sum\": { \"amount\": 1, \"currency\": \"RUB\" }, \"paymentMethod\": { \"type\": \"Account\", \"accountId\": \"643\" }, \"fields\": { \"account\": \"79000000000\" } }"
+				},
+				"url": {
+					"raw": "{{base_URL}}/transfer",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"transfer"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Mock response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"id\": \"test_123\", \"sum\": { \"amount\": 1, \"currency\": \"RUB\" }, \"paymentMethod\": { \"type\": \"Account\", \"accountId\": \"643\" }, \"fields\": { \"account\": \"79000000000\" } }"
+						},
+						"url": {
+							"raw": "{{base_URL}}/transfer",
+							"host": [
+								"{{base_URL}}"
+							],
+							"path": [
+								"transfer"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{ \"status\": \"SUCCESS\" }"
+				},
+				{
+					"name": "Create payment 1 RUB",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"id\": \"test_123\", \"sum\": { \"amount\": 1, \"currency\": \"RUB\" }, \"paymentMethod\": { \"type\": \"Account\", \"accountId\": \"643\" }, \"fields\": { \"account\": \"79000000000\" } }"
+						},
+						"url": {
+							"raw": "{{base_URL}}/transfer",
+							"host": [
+								"{{base_URL}}"
+							],
+							"path": [
+								"transfer"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"status\": \"SUCCESS\",\n  \"transactionId\": \"tx_001\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Check payment execution",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/payments/test_123",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"payments",
+						"test_123"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Mock response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_URL}}/payments/test_123",
+							"host": [
+								"{{base_URL}}"
+							],
+							"path": [
+								"payments",
+								"test_123"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{ \"status\": \"SUCCESS\" }"
+				},
+				{
+					"name": "Check payment execution",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_URL}}/payments/test_123",
+							"host": [
+								"{{base_URL}}"
+							],
+							"path": [
+								"payments",
+								"test_123"
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"status\": \"SUCCESS\",\n  \"id\": \"test_123\"\n}\n"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_URL",
+			"value": "https://d08bf4a6-ec68-4e62-bda3-c1681435a8ac.mock.pstmn.io"
+		}
+	]
 }
