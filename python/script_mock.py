@@ -11,15 +11,14 @@ class TestQiwiAPIMock(unittest.TestCase):
         self.mocker = requests_mock.Mocker()
         self.mocker.start()
 
-        # Mock endpoints
         self.mocker.get(f"{BASE_URL}/payments", 
-            json={"data": [{"id": "123", "status": "SUCCESS"}]})
+                        json={"data": [{"id": "123", "status": "SUCCESS"}, {"id": "124", "status": "WAITING"}]})
         self.mocker.get(f"{BASE_URL}/accounts", 
-            json={"accounts": [{"balance": {"amount": 100, "currency": "RUB"}}]})
+                        json={"accounts": [{"balance": {"amount": 100, "currency": "RUB"}}]})
         self.mocker.post(f"{BASE_URL}/transfer", 
-            json={"status": "SUCCESS"})
+                         json={"status": "SUCCESS", "transactionId": "tx_001"})
         self.mocker.get(f"{BASE_URL}/payments/{self.payment_id}", 
-            json={"status": "SUCCESS"})
+                        json={"status": "SUCCESS", "id": self.payment_id})
 
     def tearDown(self):
         self.mocker.stop()
@@ -48,3 +47,4 @@ class TestQiwiAPIMock(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
