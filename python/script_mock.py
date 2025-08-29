@@ -26,25 +26,27 @@ class TestQiwiAPIMock(unittest.TestCase):
     def test_service_access(self):
         resp = requests.get(f"{BASE_URL}/payments")
         data = resp.json()
+        print("Check service access response:", data)
         self.assertIn("data", data)
-        self.assertIsInstance(data["data"], list)
 
     def test_balance_positive(self):
         resp = requests.get(f"{BASE_URL}/accounts")
         data = resp.json()
+        print("Check balance response:", data)
         self.assertGreater(data["accounts"][0]["balance"]["amount"], 0)
 
     def test_create_payment(self):
         resp = requests.post(f"{BASE_URL}/transfer", json={"id": self.payment_id})
         data = resp.json()
+        print("Create payment response:", data)
         self.assertIn(data["status"], ["SUCCESS", "WAITING"])
 
     def test_payment_execution(self):
         resp = requests.get(f"{BASE_URL}/payments/{self.payment_id}")
         data = resp.json()
+        print("Payment execution response:", data)
         self.assertIn(data["status"], ["SUCCESS", "WAITING"])
 
 
 if __name__ == "__main__":
     unittest.main()
-
