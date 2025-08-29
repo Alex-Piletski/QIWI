@@ -10,15 +10,27 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://mock.qiwi/api/payments",
-          "host": ["mock.qiwi", "api", "payments"]
+          "raw": "{{baseUrl}}/payments",
+          "host": ["{{baseUrl}}"],
+          "path": ["payments"]
         }
       },
       "response": [
         {
-          "name": "Mock response",
+          "name": "Example: payments list",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payments",
+              "host": ["{{baseUrl}}"],
+              "path": ["payments"]
+            }
+          },
           "status": "OK",
           "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
           "body": "{ \"data\": [{ \"id\": \"123\", \"status\": \"SUCCESS\" }] }"
         }
       ]
@@ -29,15 +41,27 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://mock.qiwi/api/accounts",
-          "host": ["mock.qiwi", "api", "accounts"]
+          "raw": "{{baseUrl}}/accounts",
+          "host": ["{{baseUrl}}"],
+          "path": ["accounts"]
         }
       },
       "response": [
         {
-          "name": "Mock response",
+          "name": "Example: account balance",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/accounts",
+              "host": ["{{baseUrl}}"],
+              "path": ["accounts"]
+            }
+          },
           "status": "OK",
           "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
           "body": "{ \"accounts\": [{ \"balance\": { \"amount\": 100, \"currency\": \"RUB\" } }] }"
         }
       ]
@@ -54,15 +78,33 @@
           "raw": "{ \"id\": \"test_123\", \"sum\": { \"amount\": 1, \"currency\": \"RUB\" }, \"paymentMethod\": { \"type\": \"Account\", \"accountId\": \"643\" }, \"fields\": { \"account\": \"79000000000\" } }"
         },
         "url": {
-          "raw": "https://mock.qiwi/api/transfer",
-          "host": ["mock.qiwi", "api", "transfer"]
+          "raw": "{{baseUrl}}/transfer",
+          "host": ["{{baseUrl}}"],
+          "path": ["transfer"]
         }
       },
       "response": [
         {
-          "name": "Mock response",
+          "name": "Example: create payment",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"id\": \"test_123\" }"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/transfer",
+              "host": ["{{baseUrl}}"],
+              "path": ["transfer"]
+            }
+          },
           "status": "OK",
           "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
           "body": "{ \"status\": \"SUCCESS\" }"
         }
       ]
@@ -73,18 +115,36 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://mock.qiwi/api/payments/test_123",
-          "host": ["mock.qiwi", "api", "payments", "test_123"]
+          "raw": "{{baseUrl}}/payments/test_123",
+          "host": ["{{baseUrl}}"],
+          "path": ["payments", "test_123"]
         }
       },
       "response": [
         {
-          "name": "Mock response",
+          "name": "Example: payment status",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payments/test_123",
+              "host": ["{{baseUrl}}"],
+              "path": ["payments", "test_123"]
+            }
+          },
           "status": "OK",
           "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
           "body": "{ \"status\": \"SUCCESS\" }"
         }
       ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://mock.qiwi/api"
     }
   ]
 }
