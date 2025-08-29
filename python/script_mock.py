@@ -1,36 +1,48 @@
 import unittest
-import time
+import requests
+import requests_mock
 
-def fake_get(url):
-    if "payments" in url and "accounts" not in url:
-        return {"data": [{"id": "123", "status": "SUCCESS"}]}
-    if "accounts" in url:
-        return {"accounts": [{"balance": {"amount": 100, "currency": "RUB"}}]}
-    if "payments/test_123" in url:
-        return {"status": "SUCCESS"}
-    return {}
-
-def fake_post(url, json):
-    return {"status": "SUCCESS"}
+BASE_URL = "https://mock.qiwi/api"
 
 class TestQiwiAPIMock(unittest.TestCase):
     payment_id = "test_123"
 
+    def setUp(self):
+        self.mocker = requests_mock.Mocker()
+        self.mocker.start()
+
+        # Mock endpoints
+        self.mocker.get(f"{BASE_URL}/payments", 
+            json={"data": [{"id": "123", "status": "SUCCESS"}]})
+        self.mocker.get(f"{BASE_URL}/accounts", 
+            json={"accounts": [{"balance": {"amount": 100, "currency": "RUB"}}]})
+        self.mocker.post(f"{BASE_URL}/transfer", 
+            json={"status": "SUCCESS"})
+        self.mocker.get(f"{BASE_URL}/payments/{self.payment_id}", 
+            json={"status": "SUCCESS"})
+
+    def tearDown(self):
+        self.mocker.stop()
+
     def test_service_access(self):
-        data = fake_get("payments")
+        resp = requests.get(f"{BASE_URL}/payments")
+        data = resp.json()
         self.assertIn("data", data)
         self.assertIsInstance(data["data"], list)
 
     def test_balance_positive(self):
-        data = fake_get("accounts")
+        resp = requests.get(f"{BASE_URL}/accounts")
+        data = resp.json()
         self.assertGreater(data["accounts"][0]["balance"]["amount"], 0)
 
     def test_create_payment(self):
-        data = fake_post("transfer", {"id": self.payment_id})
+        resp = requests.post(f"{BASE_URL}/transfer", json={"id": self.payment_id})
+        data = resp.json()
         self.assertIn(data["status"], ["SUCCESS", "WAITING"])
 
     def test_payment_execution(self):
-        data = fake_get(f"payments/{self.payment_id}")
+        resp = requests.get(f"{BASE_URL}/payments/{self.payment_id}")
+        data = resp.json()
         self.assertIn(data["status"], ["SUCCESS", "WAITING"])
 
 
